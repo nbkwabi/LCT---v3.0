@@ -1,0 +1,405 @@
+# LifeCare Training — Project Rules
+# This file governs ALL AI-assisted development on this project.
+# It MUST be present in the project root before any code is written.
+# All Claude Code agent teams MUST follow these rules.
+
+# ============================================================
+# PROJECT IDENTITY
+# ============================================================
+
+project_name: LifeCare Training
+domain: lifecaretraining.uk
+phase: Phase 1 — Brochure Site
+purpose: Generate enquiries from care home managers. No login, no booking system, no portal.
+
+# ============================================================
+# TECH STACK — NON-NEGOTIABLE
+# ============================================================
+
+framework: Next.js App Router (NOT Pages Router)
+language: TypeScript (strict mode)
+styling: Tailwind CSS
+hosting: Vercel
+node_version: ">=20.0.0"
+package_manager: npm
+
+# CRITICAL: Use App Router patterns ONLY.
+# - Use `app/` directory, NOT `pages/` directory
+# - Use `layout.tsx` and `page.tsx`, NOT `_app.tsx` or `_document.tsx`
+# - Use `metadata` export for SEO, NOT `<Head>` component
+# - Use `next/navigation` for routing, NOT `next/router`
+# - Use Server Components by default; add 'use client' only when needed
+# - Use `next/image` for all images, NOT `<img>` tags
+# - Use `next/link` for all internal links, NOT `<a>` tags
+
+# Phase 2+ only (DO NOT implement in Phase 1):
+# - Supabase (database, auth)
+# - Magic link authentication
+# - Any user login/registration
+# - Any dashboard or portal features
+
+# ============================================================
+# BRAND STANDARDS — Brand Bible v3.0
+# ============================================================
+
+# COLOURS — Define as Tailwind custom colours in tailwind.config.ts
+# These are the ONLY colours permitted. Do not use Tailwind default palette.
+
+colours:
+  lifecare-green: "#2b7925"   # Primary — buttons, links, headings, icons
+  dark: "#111827"             # Headers, nav bars, footer, dark backgrounds
+  goldenrod: "#D97706"        # Decorative accents only — quote marks, star ratings, badges. Max 2 per page. NEVER for CTA buttons (fails WCAG AA with white text at 3.19:1)
+  soft-sage: "#66BB6A"        # Decorative only — badges, subtle indicators
+  pale-green: "#E8F5E9"       # Section backgrounds, alternating rows
+  body-text: "#4b5563"        # All paragraph/body text
+  white: "#ffffff"            # Page backgrounds, card surfaces
+  border: "#e5e7eb"           # Dividers, card borders, input borders
+
+# Tier colours (course pages only):
+  tier-1: "#111827"           # Standard Mandatory
+  tier-2: "#3A8B89"           # Core Care
+  tier-3: "#2b7925"           # Specialist L3
+  tier-4: "#1B5E20"           # Clinical/MPharm Premium
+
+# Status colours (future dashboards only — not used in Phase 1):
+  success: "#66BB6A"
+  error: "#ef4444"
+  warning: "#f59e0b"
+  info: "#3A8B89"
+
+# WCAG COMPLIANCE — All text must meet AA minimum
+# PASS: White on lifecare-green (5.43:1), White on dark (17.74:1)
+# PASS: lifecare-green on white (5.43:1), dark on white (17.74:1)
+# PASS: body-text on white (7.56:1), body-text on pale-green (6.72:1)
+# FAIL: White on soft-sage (2.36:1) — NEVER use this combination
+# FAIL: lifecare-green text on dark backgrounds — NEVER use this
+
+# TYPOGRAPHY
+font_family: "Arial, sans-serif"
+# Arial is the ONLY permitted font. No Inter, no Roboto, no system-ui.
+# Remove any Google Fonts imports. Arial ships with every OS.
+
+# Web scale:
+  h1: "font-bold text-4xl leading-tight"           # 36px, bold
+  h2: "font-bold text-3xl leading-snug"             # 30px, bold
+  h3: "font-semibold text-2xl leading-snug"         # 24px, semibold
+  body: "font-normal text-base leading-relaxed"     # 16px, regular
+  small: "font-normal text-sm leading-normal"       # 14px, regular
+  caption: "font-normal text-xs leading-tight"      # 12px, regular
+  label: "font-bold text-xs uppercase tracking-widest text-lifecare-green"  # 11px, bold, uppercase, wide tracking — section markers above H2s
+
+# SPACING — 8-point grid
+# All spacing values MUST be multiples of 8px (2, 4, 6, 8, 10, 12, 16 in Tailwind units)
+# Preferred Tailwind spacing: p-2 (8px), p-4 (16px), p-6 (24px), p-8 (32px), p-10 (40px), p-12 (48px), p-16 (64px)
+
+# BRAND NAME
+# Always: "LifeCare Training"
+# Never: "LifeCare Training Academy", "Lifecare", "Life Care", "LCT"
+
+# CQC CLAIMS — LEGAL REQUIREMENT
+# Never say: "CQC Approved" — CQC does not approve training providers
+# Always say: "CQC-aligned" or "supports compliance with CQC standards"
+
+# COURSE DURATION FORMATTING — NEVER abbreviate
+# Always: "Half Day (approx. 3–4 hrs)" and "Full Day (approx. 6 hrs)"
+# Never: "HD", "FD", "half day", "full day" without the parenthetical
+
+# ============================================================
+# LANGUAGE & LOCALE
+# ============================================================
+
+locale: en-GB
+# ALL content must use UK English:
+# colour (not color), organisation (not organization), programme (not program)
+# specialise (not specialize), recognise (not recognize), analyse (not analyze)
+# centre (not center), defence (not defense), licence (noun) / license (verb)
+
+# Date format: DD Month YYYY (e.g., 13 February 2026)
+# Currency: £ prefix, no space (e.g., £650, £1,100)
+# Phone format: UK mobile with spaces (e.g., 07xxx xxx xxx)
+
+# ============================================================
+# FILE & COMPONENT CONVENTIONS
+# ============================================================
+
+# Directory structure:
+# app/                        — Next.js App Router pages
+#   layout.tsx                 — Root layout (nav + footer)
+#   page.tsx                   — Homepage
+#   about/page.tsx             — About page
+#   courses/page.tsx           — Courses listing
+#   courses/[slug]/page.tsx    — Individual course pages
+#   how-it-works/page.tsx      — Training lifecycle
+#   enquiry/page.tsx           — Enquiry form
+#   faq/page.tsx               — FAQ (post-launch)
+#   areas/london/page.tsx      — Location pages (post-launch)
+#   areas/kent/page.tsx
+#   blog/page.tsx              — Blog listing (post-launch)
+#   blog/[slug]/page.tsx       — Blog posts (post-launch)
+#   privacy/page.tsx           — Privacy policy placeholder
+#   terms/page.tsx             — T&Cs placeholder
+#   accessibility/page.tsx     — Accessibility statement placeholder
+#   cookies/page.tsx           — Cookie policy placeholder
+# components/                  — Shared components
+#   ui/                        — Atomic UI elements (Button, Card, Badge, etc.)
+#   layout/                    — Layout components (Navbar, Footer, Section)
+#   forms/                     — Form components (EnquiryForm, etc.)
+#   courses/                   — Course-specific components
+# lib/                         — Utilities, helpers, types
+#   courses.ts                 — Course data (32 courses with full metadata)
+#   types.ts                   — TypeScript interfaces
+#   constants.ts               — Site-wide constants (nav items, CTAs, contact info)
+#   schema.ts                  — JSON-LD schema generators
+#   analytics.ts               — GA4 event helpers
+# public/                      — Static assets
+#   images/                    — Optimised images
+#   favicon.ico
+
+# Component naming: PascalCase files matching export name
+#   e.g., EnquiryForm.tsx exports function EnquiryForm()
+
+# No default exports on non-page components. Use named exports.
+# Pages (page.tsx) use default export as required by Next.js.
+
+# ============================================================
+# FORM VALIDATION — ZOD REQUIRED
+# ============================================================
+
+# ALL form inputs MUST use Zod schemas for validation.
+# In healthcare, a validation error could hide critical information.
+# This is non-negotiable.
+
+# Enquiry form schema:
+# - careHomeName: z.string().min(2, "Please enter your care home name")
+# - contactName: z.string().min(2, "Please enter your name")
+# - email: z.string().email("Please enter a valid email address")
+# - phone: z.string().regex(/^(?:0|\+44)[0-9\s]{9,13}$/, "Please enter a valid UK phone number")
+# - staffNumbers: z.string().optional()
+# - honeypot: z.string().max(0)  // Spam protection — must be empty
+
+# ============================================================
+# SEO & SCHEMA MARKUP
+# ============================================================
+
+# Every page MUST have:
+# - Unique <title> (under 60 characters)
+# - Unique meta description (under 160 characters)
+# - Open Graph tags (og:title, og:description, og:image, og:url, og:type)
+# - Canonical URL
+
+# Schema markup (JSON-LD in <script> tags):
+# - Homepage: EducationalOrganization + LocalBusiness + Service
+# - Course pages: Course schema per course
+# - FAQ page: FAQPage schema
+# - All pages: BreadcrumbList
+# - About page: Person (Nathan)
+
+# robots.txt MUST permit AI crawlers:
+# User-agent: GPTBot
+# Allow: /
+# User-agent: ClaudeBot
+# Allow: /
+# User-agent: PerplexityBot
+# Allow: /
+# User-agent: Google-Extended
+# Allow: /
+
+# Generate sitemap.xml automatically via next-sitemap or similar.
+
+# ============================================================
+# ANALYTICS & TRACKING
+# ============================================================
+
+# Source of truth: website/specs/analytics-implementation-plan-v1_0.md
+# Do NOT implement analytics from this file alone — read the full plan.
+
+# PRIMARY: Vercel Web Analytics
+# - Install: @vercel/analytics
+# - Zero cookies, zero PECR exposure, no consent needed
+# - <1KB, included with Vercel hosting
+# - Add <Analytics /> component to app/layout.tsx
+
+# SECONDARY: Google Analytics 4 (under DUAA statistical exception)
+# - GA4 Measurement ID: G-N6SRNT32LX
+# - Loads by default via next/script (NOT @next/third-parties)
+# - Basic Consent Mode: if user opts out, GA4 script does not load at all
+# - No consent banner required (DUAA exception commenced 5 Feb 2026)
+# - Opt-out toggle in footer on every page
+# - GA4 property must have all data sharing disabled (see analytics plan for checklist)
+
+# DO NOT USE:
+# - @next/third-parties/google (cannot consent-gate, loads immediately)
+# - Any Consent Management Platform (overkill, adds 50-150KB)
+# - Consent Mode v2 Advanced (cookieless pings = "gaining access" under PECR)
+# - localStorage for consent state (use cookie)
+
+# Conversion events to track:
+# - enquiry_form_submit (primary conversion)
+# - course_page_view (with course_name parameter)
+# - cta_click (with cta_text and cta_location parameters)
+# - phone_tap (mobile "Tap to Call" clicks)
+# - scroll_depth (25%, 50%, 75%, 100% on key pages)
+
+# Google Search Console: Verify via DNS TXT record on Vercel
+# Sentry: Free tier for error tracking (next/script, unhandled errors + form failures)
+
+# ============================================================
+# CTA HIERARCHY
+# ============================================================
+
+# Primary CTA (green button, appears on every page):
+#   Text: "Get a CQC-Ready Training Quote"
+#   Link: /enquiry
+#   Style: bg-lifecare-green text-white hover:bg-green-700
+# NOTE: Goldenrod (#D97706) is NOT used for any CTA button — green only. See website/specs/website-design-override-register.md Override 1.
+
+# Secondary CTAs (contextual):
+#   "Book a Manager Call" — About page, How It Works
+#   "View Our Courses" — Homepage
+#   "Check If Your Training Is CQC-Ready" — Courses page, location pages
+#   "Download Training Matrix Template" — Blog, resources (post-launch)
+#   "Tap to Call Nathan" — Mobile only, sticky footer
+
+# ============================================================
+# IMAGES & ASSETS
+# ============================================================
+
+# Use next/image for ALL images. No raw <img> tags.
+# Optimise all images before adding to /public/images/
+# Use WebP format where possible
+# Always include alt text (accessibility requirement)
+# Placeholder strategy: Use branded colour blocks with LifeCare Green
+#   where photos don't exist yet (headshot, training photos)
+
+# ============================================================
+# ACCESSIBILITY — WCAG 2.1 AA MINIMUM
+# ============================================================
+
+# - All interactive elements must be keyboard accessible
+# - All images must have descriptive alt text
+# - Form inputs must have associated <label> elements
+# - Colour contrast must meet AA ratios (see WCAG section above)
+# - Skip navigation link on every page
+# - Focus indicators must be visible
+# - No auto-playing media
+# - Heading hierarchy must be sequential (h1 → h2 → h3, never skip)
+# - Use semantic HTML: <nav>, <main>, <article>, <section>, <aside>, <footer>
+# - Bold for emphasis, never italics (dyslexia accessibility)
+# - Left-align all body text (never justified — creates "rivers" problematic for dyslexic readers)
+# - Maximum line length: 65 characters (use max-w-prose or equivalent)
+
+# ============================================================
+# PERFORMANCE TARGETS
+# ============================================================
+
+# Lighthouse targets (mobile):
+# - Performance: >90
+# - Accessibility: >95
+# - Best Practices: >90
+# - SEO: >95
+
+# Core Web Vitals:
+# - LCP: <2.5s
+# - FID: <100ms
+# - CLS: <0.1
+
+# ============================================================
+# NAVIGATION STRUCTURE
+# ============================================================
+
+# Desktop navbar:
+#   Logo (left) → Home | Courses | How It Works | About | [CTA Button: "Get a Quote"]
+# Mobile navbar:
+#   Logo (left) → Hamburger (right) → Full menu + phone CTA
+
+# Footer:
+#   Column 1: LifeCare Training logo + tagline + contact info
+#   Column 2: Quick links (Home, Courses, How It Works, About, Enquiry)
+#   Column 3: Legal links (Privacy, Terms, Cookies, Accessibility)
+#   Bottom bar: © 2026 LifeCare Training Ltd. All rights reserved.
+#   [Companies House number to be added post-registration]
+
+# ============================================================
+# ENQUIRY FORM — TECHNICAL SPEC
+# ============================================================
+
+# Method: POST to n8n webhook at https://hooks.lifecare.click/webhook/enquiry
+# n8n workflow: "LifeCare Enquiry Form Handler" (ID: XlzkBFzRwGrpqtI0)
+# Status: LIVE — tested and confirmed 17 February 2026
+# Authentication: Gmail OAuth2 (Google Workspace deprecated SMTP auth May 2025)
+# Spam protection: Honeypot field "company_website" (hidden via CSS, must be empty on submit)
+# Auto-reply: Handled by n8n Gmail OAuth2 workflow (not client-side)
+# Success state: Replace form with confirmation message (webhook returns {"success": true})
+# Error state: Show inline error, keep form data, suggest phone alternative
+# Delivery: n8n sends auto-reply to enquirer + notification to nathan@lifecaretraining.uk + logs to Google Sheet
+# GDPR: Include consent checkbox: "I agree to Life Care Training contacting me about training services"
+# Documentation: See infrastructure/n8n-enquiry-workflow-v1_0.md for full workflow details
+
+# CRITICAL: The "company_website" honeypot field MUST:
+# - Be hidden via CSS (not display:none — use position:absolute, left:-9999px or similar)
+# - Default to empty string
+# - Never be visible to users
+# - If filled by a bot, the submission is silently discarded (webhook still returns success)
+
+# ============================================================
+# COOKIE CONSENT — OPT-OUT MODEL (DUAA Exception)
+# ============================================================
+
+# No consent banner popup. No Accept/Reject modal. No CMP.
+# GA4 analytics loads by default under DUAA statistical purposes exception.
+# Users opt out via "Analytics Settings" link in footer.
+# Opt-out toggle: simple on/off switch stored in a first-party cookie.
+# When opted out: GA4 script does not load at all (Basic mode).
+# Cookie policy page (/cookie-policy) is REQUIRED — linked from footer on every page.
+# See website/specs/analytics-implementation-plan-v1_0.md for full implementation.
+
+# ============================================================
+# PROHIBITED PATTERNS
+# ============================================================
+
+# NEVER use:
+# - Pages Router patterns (_app.tsx, _document.tsx, getServerSideProps, getStaticProps)
+# - next/router (use next/navigation instead)
+# - <Head> component (use metadata export instead)
+# - <img> tags (use next/image)
+# - <a> tags for internal links (use next/link)
+# - Inter, Roboto, or any Google Font (Arial only)
+# - Tailwind default colour palette (use custom brand colours only)
+# - localStorage in any component (not available in all contexts)
+# - Justified text alignment
+# - Italic text for emphasis
+# - "CQC Approved" or any claim CQC endorses/approves LifeCare
+# - "HD" or "FD" for course durations
+# - US English spellings
+# - Mock/placeholder course data (use real 31-course catalogue from courses.ts)
+# - Any login, registration, or authentication UI
+# - Any database queries or Supabase calls
+# - console.log in production code
+
+# ============================================================
+# AGENT TEAM COORDINATION RULES
+# ============================================================
+
+# When this project is built using Claude Code Agent Teams:
+# - Each agent MUST read this file before writing any code
+# - File ownership is STRICT — only one agent writes to a given file
+# - The team lead enforces these rules and rejects non-compliant work
+# - All agents use Tailwind classes from the custom theme only
+# - All agents follow the same component naming and file structure
+# - If an agent needs to reference another agent's work, use imports — never duplicate code
+# - The SEO agent owns all metadata exports and schema markup
+# - The Forms agent owns all Zod schemas and form components
+# - The Pages agent owns page.tsx files and layout components
+# - The Courses agent owns course data and course-specific components
+
+# ============================================================
+# GIT CONVENTIONS
+# ============================================================
+
+# Branch naming: feature/page-name, fix/issue-description
+# Commit messages: Conventional Commits format
+#   feat: Add homepage hero section
+#   fix: Correct WCAG contrast on CTA button
+#   chore: Update course data
+# Main branch: main
+# Deploy: Automatic via Vercel on push to main
