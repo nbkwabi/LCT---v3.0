@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
 
 export const metadata: Metadata = {
   title: {
@@ -39,11 +42,14 @@ export default function RootLayout({
           Skip to main content
         </a>
 
-        {/* Navbar will go here (Layer 2) */}
+        <Navbar />
 
-        <main id="main-content">{children}</main>
+        <main id="main-content" className="pb-20 md:pb-0">
+          {children}
+        </main>
 
-        {/* Footer will go here (Layer 2) */}
+        <Footer />
+        <MobileStickyBar />
       </body>
     </html>
   );

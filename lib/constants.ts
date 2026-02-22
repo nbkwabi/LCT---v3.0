@@ -45,7 +45,7 @@ export const FOOTER_LINKS = {
     { label: "Terms & Conditions", href: "/terms" },
     { label: "Cookie Policy", href: "/cookies" },
     { label: "Accessibility", href: "/accessibility" },
-    { label: "Analytics Settings", href: "#analytics-settings" },
+    { label: "Analytics Settings", href: "/cookies#analytics-opt-out" },
   ],
   areas: [
     { label: "London", href: "/areas/london" },
