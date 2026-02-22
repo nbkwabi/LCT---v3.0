@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { MobileStickyBar } from "@/components/layout/MobileStickyBar";
+import { GA4Analytics } from "@/components/analytics/GA4Analytics";
 
 export const metadata: Metadata = {
   title: {
@@ -50,6 +53,9 @@ export default function RootLayout({
 
         <Footer />
         <MobileStickyBar />
+        <Analytics />
+        <SpeedInsights />
+        <GA4Analytics />
       </body>
     </html>
   );

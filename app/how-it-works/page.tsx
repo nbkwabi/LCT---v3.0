@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { JsonLd, generateBreadcrumbSchema } from "@/lib/schema";
 import {
   ClipboardList,
   Users,
@@ -401,6 +402,17 @@ export default function HowItWorksPage() {
           </p>
         </div>
       </section>
+
+      {/* JSON-LD Schema */}
+      <JsonLd
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: "https://lifecaretraining.uk" },
+          {
+            name: "How It Works",
+            url: "https://lifecaretraining.uk/how-it-works",
+          },
+        ])}
+      />
     </>
   );
 }

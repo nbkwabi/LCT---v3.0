@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { JsonLd, generateBreadcrumbSchema } from "@/lib/schema";
 import { Phone, Mail, MessageCircle } from "lucide-react";
 import { SITE } from "@/lib/constants";
 import { EnquiryForm } from "@/components/forms/EnquiryForm";
@@ -111,6 +112,14 @@ export default function EnquiryPage() {
           </div>
         </div>
       </section>
+
+      {/* JSON-LD Schema */}
+      <JsonLd
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: "https://lifecaretraining.uk" },
+          { name: "Enquiry", url: "https://lifecaretraining.uk/enquiry" },
+        ])}
+      />
     </>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { JsonLd, generateBreadcrumbSchema } from "@/lib/schema";
 import { Star, FileText, GraduationCap } from "lucide-react";
 import { getCoursesGroupedByTier, TIERS } from "@/lib/courses";
 import { TierSection } from "@/components/courses/TierSection";
@@ -192,6 +193,14 @@ export default function CoursesPage() {
           </p>
         </div>
       </section>
+
+      {/* JSON-LD Schema */}
+      <JsonLd
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: "https://lifecaretraining.uk" },
+          { name: "Courses", url: "https://lifecaretraining.uk/courses" },
+        ])}
+      />
     </>
   );
 }

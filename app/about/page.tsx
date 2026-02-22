@@ -10,6 +10,11 @@ import {
   Languages,
 } from "lucide-react";
 import { SITE } from "@/lib/constants";
+import {
+  JsonLd,
+  generatePersonSchema,
+  generateBreadcrumbSchema,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title:
@@ -578,42 +583,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* JSON-LD Person Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            name: "Nathan Kwabi",
-            jobTitle: "MPharm-qualified Healthcare Trainer",
-            description:
-              "Founder of Life Care Training. MPharm-qualified trainer delivering on-site healthcare training to care homes across London, Kent, Surrey and Essex.",
-            worksFor: {
-              "@type": "EducationalOrganization",
-              name: "Life Care Training",
-              url: "https://lifecaretraining.uk",
-            },
-            alumniOf: {
-              "@type": "CollegeOrUniversity",
-              name: "University of Reading",
-            },
-            knowsAbout: [
-              "Healthcare Training",
-              "Care Home Training",
-              "Manual Handling",
-              "Medication Management",
-              "First Aid",
-              "CQC Compliance",
-            ],
-            areaServed: [
-              { "@type": "City", name: "London" },
-              { "@type": "AdministrativeArea", name: "Kent" },
-              { "@type": "AdministrativeArea", name: "Surrey" },
-              { "@type": "AdministrativeArea", name: "Essex" },
-            ],
-          }),
-        }}
+      {/* JSON-LD Schema */}
+      <JsonLd data={generatePersonSchema()} />
+      <JsonLd
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: "https://lifecaretraining.uk" },
+          { name: "About", url: "https://lifecaretraining.uk/about" },
+        ])}
       />
     </>
   );

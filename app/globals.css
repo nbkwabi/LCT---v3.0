@@ -269,24 +269,52 @@
    ============================================================ */
 
 @media print {
+  /* Hide non-content elements */
   nav,
   footer,
-  .btn-primary,
-  .btn-secondary,
-  button {
+  [data-cookie-banner],
+  .cookie-consent,
+  button,
+  [role="switch"] {
     display: none !important;
   }
 
-  body {
+  /* Reset backgrounds to white, text to black */
+  body,
+  main,
+  section {
     background: white !important;
     color: black !important;
+  }
+
+  body {
     font-size: 12pt;
   }
 
-  a[href]::after {
+  /* Ensure headings print in black */
+  h1, h2, h3, h4 {
+    color: black !important;
+    break-after: avoid;
+  }
+
+  /* Body text prints dark */
+  p, li, td, th, span, a {
+    color: #333 !important;
+  }
+
+  /* Show URLs next to links */
+  a[href^="http"]::after,
+  a[href^="mailto"]::after,
+  a[href^="tel"]::after {
     content: " (" attr(href) ")";
     font-size: 0.8em;
     color: #666;
+    word-break: break-all;
+  }
+
+  /* Don't show URL for internal nav links (already hidden) */
+  nav a::after {
+    content: none !important;
   }
 
   a[href^="#"]::after,
@@ -294,6 +322,9 @@
     content: "";
   }
 
+  /* Prevent page breaks inside cards and course sections */
+  .course-card,
+  article,
   .card {
     break-inside: avoid;
     border: 1px solid #ccc;
@@ -301,13 +332,17 @@
     transform: none;
   }
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    break-after: avoid;
+  section {
+    break-inside: avoid;
   }
 
+  /* Remove shadows and decorative borders */
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Ensure images print (but not decorative backgrounds) */
   img {
     max-width: 100% !important;
   }

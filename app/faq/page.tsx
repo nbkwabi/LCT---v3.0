@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  JsonLd,
+  generateFAQSchema,
+  generateBreadcrumbSchema,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Frequently Asked Questions | Life Care Training",
@@ -179,6 +184,24 @@ export default function FaqPage() {
           </p>
         </div>
       </section>
+
+      {/* JSON-LD Schema */}
+      <JsonLd
+        data={generateFAQSchema(
+          FAQ_GROUPS.flatMap((group) =>
+            group.questions.map((faq) => ({
+              question: faq.q,
+              answer: faq.a,
+            })),
+          ),
+        )}
+      />
+      <JsonLd
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: "https://lifecaretraining.uk" },
+          { name: "FAQ", url: "https://lifecaretraining.uk/faq" },
+        ])}
+      />
     </>
   );
 }

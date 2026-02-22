@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { AnalyticsOptOut } from "@/components/analytics/AnalyticsOptOut";
 
 export const metadata: Metadata = {
   title: "Cookie Policy",
@@ -110,10 +111,7 @@ export default function CookiePolicyPage() {
           id="analytics-opt-out"
           className="my-8 rounded-lg border border-border bg-pale-green p-6"
         >
-          <p className="font-bold text-dark mb-2">Analytics Settings</p>
-          <p className="text-sm text-body-text mb-0">
-            The analytics opt-out toggle will be added here in a future update.
-          </p>
+          <AnalyticsOptOut />
         </div>
 
         <p>When you opt out:</p>

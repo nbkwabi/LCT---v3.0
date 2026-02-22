@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { enquirySchema } from "@/lib/validation";
 import { ENQUIRY_WEBHOOK_URL } from "@/lib/constants";
+import { trackEnquirySubmit } from "@/lib/analytics";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
 
@@ -66,6 +67,7 @@ export function EnquiryForm() {
         throw new Error("Failed to send enquiry");
       }
 
+      trackEnquirySubmit(window.location.pathname);
       setSubmitState("success");
     } catch {
       setSubmitError(

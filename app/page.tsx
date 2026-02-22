@@ -14,6 +14,12 @@ import {
   BarChart3,
 } from "lucide-react";
 import { COURSES, TIERS } from "@/lib/courses";
+import {
+  JsonLd,
+  generateOrganizationSchema,
+  generateServiceSchema,
+  generateBreadcrumbSchema,
+} from "@/lib/schema";
 
 export const metadata: Metadata = {
   title:
@@ -722,6 +728,15 @@ export default function HomePage() {
           </p>
         </div>
       </section>
+
+      {/* JSON-LD Schema */}
+      <JsonLd data={generateOrganizationSchema()} />
+      <JsonLd data={generateServiceSchema()} />
+      <JsonLd
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: "https://lifecaretraining.uk" },
+        ])}
+      />
     </>
   );
 }

@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllSlugs, getCourseBySlug, TIERS } from "@/lib/courses";
+import {
+  JsonLd,
+  generateCourseSchema,
+  generateBreadcrumbSchema,
+} from "@/lib/schema";
 import { CQCBadge } from "@/components/courses/CQCBadge";
 import {
   BookOpen,
@@ -226,6 +231,19 @@ export default async function CourseDetailPage({
           </div>
         </div>
       </section>
+
+      {/* JSON-LD Schema */}
+      <JsonLd data={generateCourseSchema(course)} />
+      <JsonLd
+        data={generateBreadcrumbSchema([
+          { name: "Home", url: "https://lifecaretraining.uk" },
+          { name: "Courses", url: "https://lifecaretraining.uk/courses" },
+          {
+            name: course.name,
+            url: `https://lifecaretraining.uk/courses/${course.slug}`,
+          },
+        ])}
+      />
     </>
   );
 }
