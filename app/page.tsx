@@ -199,36 +199,48 @@ export default function HomePage() {
   return (
     <>
       {/* Section 1: Hero */}
-      <section className="section-spacing bg-pale-green">
-        <div className="container-content">
-          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
-            <div>
-              <h1 className="mb-6 text-4xl font-bold leading-tight text-dark">
-                When CQC asks if your staff are competent {"\u2014"} make sure
-                you can prove it
+      <section className="section-spacing bg-mesh relative overflow-hidden">
+        <div className="container-content relative z-10">
+          <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-2">
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
+              <span className="section-label mb-4">Life Care Training</span>
+              <h1 className="mb-6 text-4xl lg:text-5xl font-bold leading-tight text-dark tracking-tight">
+                When CQC asks if your staff are competent {"\u2014"} <span className="text-lifecare-green">make sure you can prove it</span>
               </h1>
-              <p className="mb-8 max-w-prose text-base leading-relaxed text-body-text">
+              <p className="mb-8 max-w-prose text-lg leading-relaxed text-body-text">
                 On-site training plus a 10-week competency follow-up that gives
                 you concrete evidence {"\u2014"} spaced assessments, observation
                 prompts, and an inspection-ready engagement report.
               </p>
               <div className="flex flex-col gap-4 sm:flex-row">
-                <Link href="/enquiry" className="btn-primary">
+                <Link href="/enquiry" className="btn-primary shadow-lg shadow-lifecare-green/20">
                   Get a CQC-Ready Training Quote
                 </Link>
                 <Link href="/how-it-works" className="btn-secondary">
-                  See how our training lifecycle works &rarr;
+                  See how it works &rarr;
                 </Link>
               </div>
             </div>
-            <div
-              className="flex aspect-[4/3] w-full items-center justify-center rounded-lg bg-lifecare-green"
-              role="img"
-              aria-label="Life Care Training on-site care home training"
-            >
-              <span className="px-4 text-center text-lg font-bold text-white">
-                Life Care Training
-              </span>
+            <div className="relative animate-in fade-in zoom-in duration-1000 delay-200">
+              <div
+                className="flex aspect-[4/3] w-full items-center justify-center rounded-2xl bg-lifecare-green relative shadow-2xl overflow-hidden group"
+                role="img"
+                aria-label="Life Care Training on-site care home training"
+              >
+                <div className="absolute inset-0 bg-gradient-to-tr from-lifecare-green to-soft-sage opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 to-transparent" />
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4 transition-transform duration-500 group-hover:scale-110">
+                    <GraduationCap className="text-white" size={32} />
+                  </div>
+                  <span className="px-4 text-center text-xl font-bold text-white tracking-wide">
+                    Clinical Excellence <br /> on the Floor
+                  </span>
+                </div>
+              </div>
+              {/* Decorative elements */}
+              <div className="absolute -top-6 -right-6 w-24 h-24 bg-goldenrod/10 rounded-full blur-2xl" />
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-lifecare-green/10 rounded-full blur-2xl" />
             </div>
           </div>
         </div>
@@ -356,7 +368,7 @@ export default function HomePage() {
             </footer>
           </blockquote>
 
-          <div className="my-8 rounded-lg bg-white p-6 md:p-8">
+          <div className="my-8 rounded-xl bg-white p-6 md:p-10 shadow-xl border border-border">
             <div className="overflow-x-auto">
               <table
                 className="w-full border-collapse text-left"
@@ -364,24 +376,24 @@ export default function HomePage() {
               >
                 <thead>
                   <tr>
-                    <th className="w-1/2 border-b border-border px-4 py-4 text-sm font-bold text-dark">
+                    <th className="w-1/2 border-b border-border px-6 py-5 text-sm font-bold text-dark uppercase tracking-wider">
                       Feature
                     </th>
-                    <th className="w-1/4 border-b border-border px-4 py-4 text-center text-sm font-bold text-dark">
+                    <th className="w-1/4 border-b border-border px-6 py-5 text-center text-sm font-bold text-dark uppercase tracking-wider">
                       Standard Training
                     </th>
-                    <th className="w-1/4 border-b-2 border-lifecare-green px-4 py-4 text-center text-sm font-bold text-lifecare-green">
-                      Life Care Evidence Lifecycle
+                    <th className="w-1/4 border-b-2 border-lifecare-green bg-pale-green/30 px-6 py-5 text-center text-sm font-bold text-lifecare-green uppercase tracking-wider rounded-t-lg">
+                      Life Care Lifecycle
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {COMPARISON_ROWS.map((row) => (
-                    <tr key={row.feature} className="border-b border-border">
-                      <td className="px-4 py-3 text-sm text-body-text">
+                    <tr key={row.feature} className="border-b border-border group">
+                      <td className="px-6 py-4 text-sm font-medium text-body-text group-hover:text-dark transition-colors">
                         {row.feature}
                       </td>
-                      <td className="px-4 py-3 text-center">
+                      <td className="px-6 py-4 text-center text-body-text/60">
                         {row.standard ? (
                           <Check
                             className="inline-block text-lifecare-green"
@@ -390,17 +402,18 @@ export default function HomePage() {
                           />
                         ) : (
                           <X
-                            className="inline-block text-error"
+                            className="inline-block text-error/50"
                             size={20}
                             aria-label="Not included"
                           />
                         )}
                       </td>
-                      <td className="px-4 py-3 text-center">
+                      <td className="px-6 py-4 text-center bg-pale-green/10">
                         {row.lifecycle ? (
                           <Check
                             className="inline-block text-lifecare-green"
-                            size={20}
+                            size={22}
+                            strokeWidth={3}
                             aria-label="Included"
                           />
                         ) : (
@@ -472,14 +485,24 @@ export default function HomePage() {
       >
         <div className="container-content">
           <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-2">
-            <div
-              className="mx-auto flex aspect-[3/4] w-full max-w-sm items-center justify-center rounded-lg bg-lifecare-green md:mx-0"
-              role="img"
-              aria-label="Nathan Kwabi, Lead Trainer at Life Care Training"
-            >
-              <span className="px-4 text-center text-lg font-bold text-white">
-                Nathan Kwabi {"\u2014"} Lead Trainer
-              </span>
+            <div className="relative animate-in fade-in slide-in-from-left-4 duration-1000">
+              <div
+                className="mx-auto flex aspect-[3/4] w-full max-w-sm items-center justify-center rounded-2xl bg-lifecare-green md:mx-0 shadow-2xl relative overflow-hidden group"
+                role="img"
+                aria-label="Nathan Kwabi, Lead Trainer at Life Care Training"
+              >
+                <div className="absolute inset-0 bg-gradient-to-b from-lifecare-green/80 to-dark opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="relative z-10 flex flex-col items-center">
+                  <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-6 border border-white/20">
+                    <Users className="text-white" size={40} />
+                  </div>
+                  <span className="px-4 text-center text-xl font-bold text-white tracking-wide">
+                    Nathan Kwabi <br />
+                    <span className="text-sm font-medium opacity-80 uppercase tracking-widest mt-2 block">Lead Trainer</span>
+                  </span>
+                </div>
+              </div>
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-soft-sage/20 rounded-full blur-xl" />
             </div>
             <div>
               <span className="section-label">Your Trainer</span>
@@ -520,55 +543,61 @@ export default function HomePage() {
       </section>
 
       {/* Section 6: Real Impact Story */}
-      <section className="section-spacing bg-white">
+      <section className="section-spacing bg-white overflow-hidden">
         <div className="container-content">
-          <div className="mx-auto max-w-4xl rounded-r-lg border-l-4 border-lifecare-green bg-pale-green p-8 md:p-12">
-            <span className="mb-4 inline-block text-xs font-bold uppercase tracking-widest text-lifecare-green">
-              Real Impact
-            </span>
-            <h2 className="mb-4 text-2xl font-bold leading-snug text-dark">
-              When first aid training saved a resident{"\u2019"}s life {"\u2014"}{" "}
-              two weeks later
-            </h2>
-            <p className="mb-4 text-base leading-relaxed text-body-text">
-              Two weeks after attending his first ever first aid session with
-              Life Care, a care assistant used the choking procedure he{"\u2019"}
-              d practised to save an elderly resident{"\u2019"}s life during a
-              mealtime emergency. It was the first time he{"\u2019"}d ever been
-              trained in first aid. The care home manager and deputy manager both
-              confirmed the outcome.
-            </p>
-            <p className="text-xs text-body-text">
-              Outcome stories are shared with permission. Individual results and
-              circumstances vary.
-            </p>
+          <div className="mx-auto max-w-4xl relative">
+            <div className="glass-panel p-8 md:p-14 shadow-2xl border-l-[6px] border-lifecare-green transform hover:scale-[1.01] transition-transform duration-500">
+              <span className="mb-4 inline-block text-xs font-bold uppercase tracking-[0.2em] text-lifecare-green">
+                Real Impact
+              </span>
+              <h2 className="mb-6 text-2xl md:text-3xl font-bold leading-tight text-dark">
+                When first aid training saved a resident{"\u2019"}s life {"\u2014"}{" "}
+                two weeks later
+              </h2>
+              <div className="space-y-4">
+                <p className="text-lg leading-relaxed text-body-text italic">
+                  {"\u201C"}Two weeks after attending his first ever first aid session with
+                  Life Care, a care assistant used the choking procedure he{"\u2019"}
+                  d practised to save an elderly resident{"\u2019"}s life during a
+                  mealtime emergency. It was the first time he{"\u2019"}d ever been
+                  trained in first aid. The care home manager and deputy manager both
+                  confirmed the outcome.{"\u201D"}
+                </p>
+                <p className="text-xs text-body-text/60 uppercase tracking-widest font-bold">
+                  Outcome story shared with permission
+                </p>
+              </div>
+            </div>
+            {/* Background accent */}
+            <div className="absolute -top-10 -left-10 w-40 h-40 bg-lifecare-green/5 rounded-full blur-3xl -z-10" />
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-soft-sage/5 rounded-full blur-3xl -z-10" />
           </div>
         </div>
       </section>
 
       {/* Section 7: Training Lifecycle Teaser */}
-      <section className="section-spacing bg-pale-green">
+      <section className="section-spacing bg-mesh">
         <div className="container-content">
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold leading-snug text-dark">
+          <div className="mb-16 text-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
+            <h2 className="mb-4 text-3xl md:text-4xl font-bold leading-tight text-dark">
               Beyond the classroom
             </h2>
-            <p className="mx-auto max-w-prose text-base leading-relaxed text-body-text">
+            <p className="mx-auto max-w-prose text-lg leading-relaxed text-body-text">
               Most training providers deliver a session and disappear. We stay
               with you for 10 weeks {"\u2014"} because competence isn{"\u2019"}t
               built in an afternoon.
             </p>
           </div>
-          <div className="mb-12 grid grid-cols-1 gap-6 sm:grid-cols-5">
-            {TIMELINE_STEPS.map((step) => (
-              <div key={step.label} className="text-center">
-                <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-lifecare-green text-white">
-                  <step.Icon size={24} aria-hidden="true" />
+          <div className="mb-16 grid grid-cols-1 gap-8 sm:grid-cols-5 relative">
+            {TIMELINE_STEPS.map((step, idx) => (
+              <div key={step.label} className={`text-center animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-[${idx * 100}ms]`}>
+                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white shadow-xl text-lifecare-green border border-pale-green relative z-10 transform hover:scale-110 transition-transform duration-300">
+                  <step.Icon size={32} strokeWidth={1.5} aria-hidden="true" />
                 </div>
-                <p className="mb-1 text-xs font-bold uppercase tracking-widest text-lifecare-green">
+                <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-lifecare-green">
                   {step.label}
                 </p>
-                <h3 className="mb-1 text-lg font-semibold text-dark">
+                <h3 className="mb-2 text-xl font-bold text-dark">
                   {step.heading}
                 </h3>
                 <p className="text-sm leading-relaxed text-body-text">
@@ -578,8 +607,8 @@ export default function HomePage() {
             ))}
           </div>
           <div className="text-center">
-            <Link href="/how-it-works" className="btn-secondary">
-              See the full training lifecycle &rarr;
+            <Link href="/how-it-works" className="btn-secondary group">
+              See the full training lifecycle <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">&rarr;</span>
             </Link>
           </div>
         </div>
